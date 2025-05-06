@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var showNewExpenseInputs = false
+    @State private var setOfPeople: [String] = []
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                Text("Hello world")
+            }
+            .navigationTitle("Fair Expenses")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Add Expense") {
+                        showNewExpenseInputs.toggle()
+                    }
+                }
+            }
+            .sheet(isPresented: $showNewExpenseInputs) {
+                AddExpenseView()
+            }
         }
-        .padding()
     }
 }
 
