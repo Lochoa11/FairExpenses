@@ -10,8 +10,10 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var showNewExpenseInputs = false
-    @State private var setOfPeople: [String] = []
+    @State private var showNumberOfPeopleInputs = false
     
+    @State private var setOfPeople: [Person] = []
+
     var body: some View {
         NavigationStack {
             List {
@@ -24,9 +26,17 @@ struct ContentView: View {
                         showNewExpenseInputs.toggle()
                     }
                 }
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Add People") {
+                        showNumberOfPeopleInputs.toggle()
+                    }
+                }
             }
             .sheet(isPresented: $showNewExpenseInputs) {
                 AddExpenseView()
+            }
+            .sheet(isPresented: $showNumberOfPeopleInputs) {
+                AddPeopleView()
             }
         }
     }
